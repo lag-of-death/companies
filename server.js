@@ -9,20 +9,21 @@ const allowedIPs = [process.env.IP_THAT_CAN_SEE_SOURCE_MAPS];
 
 const app = express();
 
-app.get(/\.map$/, IpFilter(allowedIPs, {mode: 'allow'}));
+app.get(/\.map$/, IpFilter(allowedIPs, { mode: 'allow' }));
 
-app.use(favicon(__dirname + '/build/favicon.ico'));
+app.use(favicon(`${__dirname}/build/favicon.ico`));
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname, 'build', 'index.html')));
 
+// eslint-disable-next-line
 app.use((err, req, res, next) => {
-    if (err instanceof IpDeniedError) {
-        res.sendStatus(401);
-    } else{
-        res.sendStatus(err.status || 500);
-    }
+  if (err instanceof IpDeniedError) {
+    res.sendStatus(401);
+  } else {
+    res.sendStatus(err.status || 500);
+  }
 });
 
 app.listen(port);
