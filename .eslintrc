@@ -1,0 +1,27 @@
+{
+  "extends": ["airbnb"],
+  "parser": "babel-eslint",
+  "rules": {
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js"]
+      }
+    ],
+    "react/no-array-index-key": 0,
+    "no-underscore-dangle": 0,
+    "no-nested-ternary": 0,
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
+    "no-alert": 0,
+    "no-restricted-globals": 0,
+    "import/imports-first": ["error", "absolute-first"],
+    "import/newline-after-import": "error"
+  },
+  "globals": {
+    "window": true,
+    "it": true,
+    "isNaN": true,
+    "document": true,
+    "alert": true
+  }
+}
