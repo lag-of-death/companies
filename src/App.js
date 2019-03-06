@@ -152,7 +152,14 @@ class App extends Component {
             {
             App.renderCompanies(
               state.foundCompanies,
-              company => <Button onClick={() => this.addCompanyHandler(company)}>add</Button>,
+              company => (
+                <Button
+                  disabled={state.progress === ADDING}
+                  onClick={() => this.addCompanyHandler(company)}
+                >
+                  add
+                </Button>
+              ),
             )
           }
           </FoundCompanies>
