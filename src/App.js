@@ -41,7 +41,7 @@ const SearchInput = styled.input`
   margin-bottom: 2px;
 `;
 
-const FoundCompany = styled.div`
+const Company = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 2px;
@@ -105,6 +105,21 @@ class App extends Component {
     });
   };
 
+  static renderCompanies(companies, getComponent = () => null) {
+    return (
+      companies.map((company) => {
+        const { name, price } = company;
+
+        return (
+          <Company key={`${name}:${price}`}>
+            { name } : { price }
+            { getComponent(company) }
+          </Company>
+        );
+      })
+    );
+  }
+
   render() {
     const { state } = this;
 
@@ -118,16 +133,10 @@ class App extends Component {
           <SearchButton>search</SearchButton>
           <FoundCompanies>
             {
-              state.foundCompanies.map((company) => {
-                const { name, price } = company;
-
-                return (
-                  <FoundCompany key={`${name}:${price}`}>
-                    { name } : { price }
-                    <Button onClick={() => this.addCompanyHandler(company)}>add</Button>
-                  </FoundCompany>
-                );
-              })
+              App.renderCompanies(
+                state.foundCompanies,
+                company => <Button onClick={() => this.addCompanyHandler(company)}>add</Button>,
+              )
             }
           </FoundCompanies>
         </CompanyAdder>
@@ -136,7 +145,12 @@ class App extends Component {
           <AddedCompaniesHeader>
             ADDED COMPANIES
           </AddedCompaniesHeader>
-          {JSON.stringify(state.addedCompanies)}
+          {
+            App.renderCompanies(
+              state.addedCompanies,
+              company => <Button>REMOVE {company.name}</Button>,
+            )
+          }
         </AddedCompanies>
       </Container>
     );
