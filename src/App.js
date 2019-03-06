@@ -17,7 +17,15 @@ import {
 } from './helpers';
 
 import {
-  NOOP, SEARCHING, ADDING, ADDING_DONE, ALREADY_ADDED, SEARCHING_DONE, nameAttr, symbolAttr,
+  NOOP,
+  SEARCHING,
+  ADDING,
+  ADDING_DONE,
+  ALREADY_ADDED,
+  SEARCHING_DONE,
+  API_LIMIT_REACHED,
+  nameAttr,
+  symbolAttr,
 } from './helpers/constants';
 
 class App extends Component {
@@ -43,6 +51,10 @@ class App extends Component {
       this.setState({
         progress: SEARCHING_DONE,
         foundCompanies: companies.sort(byMatchScore),
+      });
+    } else {
+      this.setState({
+        progress: API_LIMIT_REACHED,
       });
     }
   };

@@ -33,6 +33,7 @@ const Header = styled.div`
   font-size: 30px;
   margin-bottom: 6px;
   text-align: center;
+  word-break: break-all;
 `;
 
 const SearchInput = styled.input`
