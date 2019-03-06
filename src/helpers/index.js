@@ -14,10 +14,12 @@ const toName = ({ name }) => name;
 
 const getData = async (name, foundCompanyName) => {
   const logoEndpoint = `https://autocomplete.clearbit.com/v1/companies/suggest?query=${name}`;
-  const { data: companiesWithLogos } = await axios.get(logoEndpoint);
-
   const quoteEndpoint = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${foundCompanyName}&apikey=${process.env.REACT_APP_ALPHAVANTAGE_API_KEY}`;
-  const { data: quoteData } = await axios.get(quoteEndpoint);
+
+  const [companiesWithLogos, quoteData] = await Promise.all([
+    axios.get(logoEndpoint),
+    axios.get(quoteEndpoint),
+  ]);
 
   return {
     companiesWithLogos,
