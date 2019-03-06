@@ -47,7 +47,7 @@ class App extends Component {
 
   searchForCompanyHandler = async ({ target: { value } }) => {
     this.setState({
-      progress: SEARCHING,
+      progress: value ? SEARCHING : NOOP,
     });
 
     const searchWithSymbolEndpoint = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${value}&apikey=${process.env.REACT_APP_ALPHAVANTAGE_API_KEY}`;
