@@ -77,12 +77,17 @@ const CompanyAdder = styled.div`
 `;
 
 class App extends Component {
+  static addCompanyHandler(companyName) {
+    console.log(companyName);
+  }
+
   constructor(props) {
     super(props);
 
     this.state = {
       companies: [
         { name: 'XYZ', price: 123 },
+        { name: 'ABC', price: 890 },
       ],
     };
   }
@@ -99,14 +104,14 @@ class App extends Component {
           <SearchInput />
           <SearchButton>search</SearchButton>
           <FoundCompanies>
-            <FoundCompany>
-              some company1
-              <Button>add</Button>
-            </FoundCompany>
-            <FoundCompany>
-              some company2
-              <Button>add</Button>
-            </FoundCompany>
+            {
+              state.companies.map(({ name, price }) => (
+                <FoundCompany key={`${name}:${price}`}>
+                  { name } : { price }
+                  <Button onClick={() => App.addCompanyHandler(name)}>add</Button>
+                </FoundCompany>
+              ))
+            }
           </FoundCompanies>
         </CompanyAdder>
         <Divider />
