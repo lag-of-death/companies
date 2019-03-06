@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const blackColor = '#000';
 const whiteColor = '#FFF';
@@ -42,6 +43,7 @@ const SearchInput = styled.input`
 `;
 
 const Company = styled.div`
+  align-items: center;
   display: flex;
   justify-content: space-between;
   margin-bottom: 2px;
@@ -69,6 +71,17 @@ const Divider = styled.div`
   flex-grow: 1;
 `;
 
+const Logo = styled.div`
+  align-items: center;
+  display: flex;
+  height: 100%;
+  width: 20%;
+  
+  img {
+    width: 100%;
+  }
+`;
+
 const Button = styled.button`
   border: 2px solid ${blackColor};
 `;
@@ -89,13 +102,20 @@ class App extends Component {
     super(props);
 
     this.state = {
-      foundCompanies: [
-        { name: 'XYZ', price: 123 },
-        { name: 'ABC', price: 890 },
-      ],
+      foundCompanies: [],
       addedCompanies: [],
     };
   }
+
+  searchForCompanyHandler = async ({ target: { value } }) => {
+    const url = `https://autocomplete.clearbit.com/v1/companies/suggest?query=${value}`;
+
+    const { data } = await axios.get(url);
+
+    this.setState({
+      foundCompanies: data,
+    });
+  };
 
   addCompanyHandler = (company) => {
     this.setState(({ addedCompanies }) => {
@@ -118,11 +138,16 @@ class App extends Component {
    static renderCompanies(companies, getComponent = () => null) {
      return (
        companies.map((company) => {
-         const { name, price } = company;
+         const { name, logo } = company;
 
          return (
-           <Company key={`${name}:${price}`}>
-             { name } : { price }
+           <Company key={`${name}:${logo}`}>
+             <div style={{ width: '40%' }}>
+               { name }
+             </div>
+             <Logo>
+               <img alt={logo} src={logo} />
+             </Logo>
              { getComponent(company) }
            </Company>
          );
@@ -139,7 +164,7 @@ class App extends Component {
            <SearchCompanyHeader>
             SEARCH
            </SearchCompanyHeader>
-           <SearchInput />
+           <SearchInput onChange={this.searchForCompanyHandler} />
            <SearchButton>search</SearchButton>
            <FoundCompanies>
              {
