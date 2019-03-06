@@ -15,6 +15,13 @@ import {
   CompanyAdder,
 } from './styled_components';
 
+const NOOP = 'NOOP';
+const SEARCHING = 'SEARCHING';
+const SEARCHING_DONE = 'SEARCHING_DONE';
+const ADDING = 'ADDING';
+const ADDING_DONE = 'ADDING_DONE';
+const NOT_FOUND = 'NOT_FOUND';
+
 const nameAttr = '2. name';
 const symbolAttr = '1. symbol';
 
@@ -33,17 +40,23 @@ class App extends Component {
     super(props);
 
     this.state = {
+      progress: NOOP,
       foundCompanies: [],
       addedCompanies: [],
     };
   }
 
   searchForCompanyHandler = async ({ target: { value } }) => {
+    this.setState({
+      progress: SEARCHING,
+    });
+
     const searchWithSymbolEndpoint = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${value}&apikey=${process.env.REACT_APP_ALPHAVANTAGE_API_KEY}`;
     const { data: { bestMatches: companies } } = await axios.get(searchWithSymbolEndpoint);
 
     if (companies && companies.length) {
       this.setState({
+        progress: SEARCHING_DONE,
         foundCompanies: companies.sort(
           (prevCompany, nextCompany) => prevCompany.matchScore > nextCompany.matchScore,
         ),
@@ -52,6 +65,10 @@ class App extends Component {
   };
 
   addCompanyHandler = async (foundCompany) => {
+    this.setState({
+      progress: ADDING,
+    });
+
     const name = foundCompany[nameAttr].replace(/(Inc\.)|(L\.P\.)|(Ltd\.)/gm, '');
 
     const logoEndpoint = `https://autocomplete.clearbit.com/v1/companies/suggest?query=${name}`;
@@ -86,6 +103,7 @@ class App extends Component {
       }, []);
 
       return {
+        progress: notAddedCompanies.length ? ADDING_DONE : NOT_FOUND,
         addedCompanies: addedCompanies.concat(notAddedCompanies),
       };
     });
@@ -127,7 +145,7 @@ class App extends Component {
       <Container>
         <CompanyAdder>
           <SearchCompanyHeader>
-          SEARCH
+            SEARCH
           </SearchCompanyHeader>
           <SearchInput onChange={this.searchForCompanyHandler} />
           <FoundCompanies>
@@ -138,6 +156,9 @@ class App extends Component {
             )
           }
           </FoundCompanies>
+          <div>
+            { state.progress }
+          </div>
         </CompanyAdder>
         <Divider />
         <AddedCompanies>
