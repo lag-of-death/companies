@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import FoundCompanyDataViewer from './components';
 
 import {
   Container,
@@ -10,7 +11,6 @@ import {
   Company,
   SearchCompanyHeader,
   Divider,
-  Logo,
   Button,
   CompanyAdder,
 } from './styled_components';
@@ -74,13 +74,13 @@ class App extends Component {
     });
   };
 
-  removeCompanyHandler = (company) => {
+  removeCompanyHandler = (companyName) => {
     const isRemovingConfirmed = window.confirm('Are you sure to remove?');
 
     if (isRemovingConfirmed) {
       this.setState(({ addedCompanies }) => ({
         addedCompanies: addedCompanies.filter(
-          addedCompany => addedCompany.name !== company.name,
+          addedCompany => addedCompany.name !== companyName,
         ),
       }));
     }
@@ -89,8 +89,7 @@ class App extends Component {
   static renderCompanies(companies, getComponent = () => null) {
     return (
       companies.map((company, companyIdx) => {
-        const { [symbolAttr]: symbol } = company;
-        const companyName = company.name || company[nameAttr];
+        const { [symbolAttr]: symbol, [nameAttr]: companyName } = company;
 
         return (
           <Company key={`${companyName}:${symbol}:${companyIdx}`}>
@@ -129,19 +128,17 @@ class App extends Component {
           ADDED COMPANIES
           </AddedCompaniesHeader>
           {
-          App.renderCompanies(
-            state.addedCompanies,
-            company => (
-              <React.Fragment>
-                <Logo>
-                  <img alt={company.logo} src={company.logo} />
-                </Logo>
-
-                <Button onClick={() => this.removeCompanyHandler(company)}>X</Button>
-              </React.Fragment>
-            ),
-          )
-        }
+            state.addedCompanies.map(
+              addedCompany => (
+                <Company key={addedCompany.name}>
+                  <FoundCompanyDataViewer
+                    removeCompanyHandler={this.removeCompanyHandler}
+                    {...addedCompany}
+                  />
+                </Company>
+              ),
+            )
+          }
         </AddedCompanies>
       </Container>
     );
