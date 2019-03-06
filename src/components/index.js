@@ -27,11 +27,16 @@ const FoundCompanyDataViewer = ({
   </React.Fragment>
 );
 
+FoundCompanyDataViewer.defaultProps = {
+  price: '',
+  priceChange: '',
+};
+
 FoundCompanyDataViewer.propTypes = {
   domain: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
-  priceChange: PropTypes.string.isRequired,
+  price: PropTypes.string,
+  priceChange: PropTypes.string,
   marketOpen: PropTypes.string.isRequired,
   marketClose: PropTypes.string.isRequired,
   logo: PropTypes.string.isRequired,
