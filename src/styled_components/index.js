@@ -52,6 +52,7 @@ const Company = styled.div`
 `;
 
 const Divider = styled.div`
+  flex-basis: 10px;
   flex-grow: 1;
 `;
 
