@@ -30,7 +30,6 @@ const FoundCompaniesContainer = styled.div`
 const Header = styled.div`
   background: ${blackColor};
   color: ${whiteColor};
-  font-family: sans-serif;
   font-size: 30px;
   margin-bottom: 6px;
   text-align: center;
