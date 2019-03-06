@@ -1,7 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Logo } from '../styled_components';
+import { Button, Company, Logo } from '../styled_components';
+import { nameAttr, symbolAttr, ADDING } from '../helpers/constants';
+
+const AddedCompanies = ({ addedCompanies, removeCompanyHandler }) => addedCompanies.map(
+  addedCompany => (
+    <Company key={addedCompany.name}>
+      <FoundCompanyDataViewer
+        marketOpen={addedCompany['5. marketOpen']}
+        marketClose={addedCompany['6. marketClose']}
+        removeCompanyHandler={removeCompanyHandler}
+        {...addedCompany}
+      />
+    </Company>
+  ),
+);
 
 const FoundCompanyDataViewer = ({
   domain, name, logo, removeCompanyHandler, marketOpen, marketClose, price, priceChange,
@@ -43,4 +57,26 @@ FoundCompanyDataViewer.propTypes = {
   removeCompanyHandler: PropTypes.func.isRequired,
 };
 
-export default FoundCompanyDataViewer;
+const FoundCompanies = ({ progress, addCompanyHandler, companies }) => (
+  companies.map((company, companyIdx) => {
+    const { [symbolAttr]: symbol, [nameAttr]: companyName } = company;
+
+    return (
+      <Company key={`${companyName}:${symbol}:${companyIdx}`}>
+        <div style={{ width: '40%' }}>
+          { companyName }
+        </div>
+        <Button
+          disabled={progress === ADDING}
+          onClick={() => addCompanyHandler(company)}
+        >
+          add
+        </Button>
+      </Company>
+    );
+  })
+);
+
+export {
+  AddedCompanies, FoundCompanies,
+};

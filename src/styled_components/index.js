@@ -12,13 +12,13 @@ const Container = styled.div`
   }
 `;
 
-const AddedCompanies = styled.div`
+const AddedCompaniesContainer = styled.div`
   border: 2px solid ${blackColor};
   flex-grow: 4;
   padding: 8px;
 `;
 
-const FoundCompanies = styled.div`
+const FoundCompaniesContainer = styled.div`
   margin-top: 8px;
   padding: 8px;
 `;
@@ -84,8 +84,8 @@ const CompanyAdder = styled.div`
 
 export {
   Container,
-  AddedCompanies,
-  FoundCompanies,
+  AddedCompaniesContainer,
+  FoundCompaniesContainer,
   SearchInput,
   Company,
   Header,

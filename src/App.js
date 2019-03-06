@@ -1,30 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import FoundCompanyDataViewer from './components';
+import { AddedCompanies, FoundCompanies } from './components';
 
 import {
   Container,
-  AddedCompanies,
-  FoundCompanies,
+  AddedCompaniesContainer,
+  FoundCompaniesContainer,
   Header,
   SearchInput,
   Company,
   Divider,
-  Button,
   CompanyAdder,
 } from './styled_components';
 
 import { getPriceInfo, toName } from './helpers';
-
-const NOOP = 'NOOP';
-const SEARCHING = 'SEARCHING';
-const SEARCHING_DONE = 'SEARCHING_DONE';
-const ADDING = 'ADDING';
-const ADDING_DONE = 'ADDING_DONE';
-const ALREADY_ADDED = 'ALREADY_ADDED';
-
-const nameAttr = '2. name';
-const symbolAttr = '1. symbol';
+import {
+  NOOP, SEARCHING, ADDING, ADDING_DONE, ALREADY_ADDED, SEARCHING_DONE, nameAttr, symbolAttr,
+} from './helpers/constants';
 
 class App extends Component {
   constructor(props) {
@@ -142,45 +134,27 @@ class App extends Component {
             SEARCH
           </Header>
           <SearchInput onChange={this.searchForCompanyHandler} />
-          <FoundCompanies>
-            {
-            App.renderCompanies(
-              state.foundCompanies,
-              company => (
-                <Button
-                  disabled={state.progress === ADDING}
-                  onClick={() => this.addCompanyHandler(company)}
-                >
-                  add
-                </Button>
-              ),
-            )
-          }
-          </FoundCompanies>
+          <FoundCompaniesContainer>
+            <FoundCompanies
+              progress={state.progress}
+              addCompanyHandler={this.addCompanyHandler}
+              foundCompanies={state.foundCompanies}
+            />
+          </FoundCompaniesContainer>
           <Header>
             { state.progress }
           </Header>
         </CompanyAdder>
         <Divider />
-        <AddedCompanies>
+        <AddedCompaniesContainer>
           <Header>
           ADDED COMPANIES
           </Header>
-          {
-            state.addedCompanies.map(
-              addedCompany => (
-                <Company key={addedCompany.name}>
-                  <FoundCompanyDataViewer
-                    marketOpen={addedCompany['5. marketOpen']}
-                    marketClose={addedCompany['6. marketClose']}
-                    removeCompanyHandler={this.removeCompanyHandler}
-                    {...addedCompany}
-                  />
-                </Company>
-              ),
-            )
-          }
-        </AddedCompanies>
+          <AddedCompanies
+            addedCompanies={state.addedCompanies}
+            removeCompanyHandler={this.removeCompanyHandler}
+          />
+        </AddedCompaniesContainer>
       </Container>
     );
   }
