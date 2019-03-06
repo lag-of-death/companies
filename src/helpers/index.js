@@ -21,8 +21,8 @@ const getData = async (name, foundCompanyName) => {
   ]);
 
   return {
-    companiesWithLogos,
-    quoteData: getPriceInfo(quoteData),
+    companiesWithLogos: companiesWithLogos.data,
+    quoteData: getPriceInfo(quoteData.data),
   };
 };
 

@@ -9,13 +9,17 @@ const Container = styled.div`
   @media(min-width: 768px) {
     flex-direction: row;
     padding: 40px;
+    justify-content: space-between;
   }
 `;
 
 const AddedCompaniesContainer = styled.div`
   border: 2px solid ${blackColor};
-  flex-grow: 4;
   padding: 8px;
+
+  @media(min-width: 768px) {
+    width: 60%;
+  }  
 `;
 
 const FoundCompaniesContainer = styled.div`
@@ -52,15 +56,16 @@ const Company = styled.div`
 `;
 
 const Divider = styled.div`
-  flex-basis: 10px;
-  flex-grow: 1;
+  @media(min-width: 768px) {
+    min-width: 5%;
+  }
 `;
 
 const Logo = styled.div`
   align-items: center;
   display: flex;
   height: 100%;
-  width: 20%;
+  width: 10%;
   
   img {
     width: 100%;
@@ -74,11 +79,11 @@ const Button = styled.button`
 const CompanyAdder = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 2;
   padding: 8px;
 
   @media(min-width: 768px) {
     border: 2px solid ${blackColor};
+    width: 30%;
   }
 `;
 

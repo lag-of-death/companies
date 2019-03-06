@@ -21,20 +21,22 @@ const FoundCompanyDataViewer = ({
   domain, name, logo, removeCompanyHandler, marketOpen, marketClose, price, priceChange,
 }) => (
   <React.Fragment>
-    <div>
+    <div title="domain" style={{ width: '15%', wordBreak: 'break-all' }}>
       {domain}
     </div>
-    <div>
+    <div title="trading hours" style={{ width: '5%', textAlign: 'center' }}>
       {marketOpen} - {marketClose}
     </div>
-    <div>
+    <div title="price" style={{ width: '10%' }}>
       {price}
     </div>
-    <div>
+    <div title="price change" style={{ width: '10%' }}>
       {priceChange}
     </div>
-    { name }
-    <Logo>
+    <div title="name" style={{ width: '20%', wordBreak: 'break-word' }}>
+      { name }
+    </div>
+    <Logo title="logo">
       <img alt={name} src={logo} />
     </Logo>
     <Button onClick={() => removeCompanyHandler(name)}>X</Button>
