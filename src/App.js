@@ -18,6 +18,16 @@ import {
 const nameAttr = '2. name';
 const symbolAttr = '1. symbol';
 
+const getPriceInfo = quote => (
+  (
+    quote && quote['Global Quote'])
+    ? {
+      price: quote['Global Quote']['05. price'],
+      priceChange: quote['Global Quote']['09. change'],
+    }
+    : {}
+);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -43,8 +53,12 @@ class App extends Component {
 
   addCompanyHandler = async (foundCompany) => {
     const name = foundCompany[nameAttr].replace(/(Inc\.)|(L\.P\.)/gm, '');
+
     const logoEndpoint = `https://autocomplete.clearbit.com/v1/companies/suggest?query=${name}`;
     const { data: companiesWithLogos } = await axios.get(logoEndpoint);
+
+    const quoteEndpoint = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${foundCompany[symbolAttr]}&apikey=${process.env.REACT_APP_ALPHAVANTAGE_API_KEY}`;
+    const { data: quoteData } = await axios.get(quoteEndpoint);
 
     const uniqCompanies = companiesWithLogos.reduce(
       (companies, currentCompany) => (
@@ -66,7 +80,9 @@ class App extends Component {
       const notAddedCompanies = notAddedCompaniesNames.reduce((acc, notAddedCompanyName) => {
         const company = uniqCompanies.find(({ name }) => name === notAddedCompanyName);
 
-        return company ? acc.concat(Object.assign({}, company, foundCompany)) : acc;
+        return company
+          ? acc.concat(Object.assign({}, company, foundCompany, getPriceInfo(quoteData)))
+          : acc;
       }, []);
 
       return {
