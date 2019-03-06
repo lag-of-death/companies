@@ -8,7 +8,6 @@ import {
   FoundCompaniesContainer,
   Header,
   SearchInput,
-  Company,
   Divider,
   CompanyAdder,
 } from './styled_components';
@@ -94,23 +93,6 @@ class App extends Component {
       }));
     }
   };
-
-  static renderCompanies(companies, getComponent = () => null) {
-    return (
-      companies.map((company, companyIdx) => {
-        const { [symbolAttr]: symbol, [nameAttr]: companyName } = company;
-
-        return (
-          <Company key={`${companyName}:${symbol}:${companyIdx}`}>
-            <div style={{ width: '40%' }}>
-              { companyName }
-            </div>
-            { getComponent(company) }
-          </Company>
-        );
-      })
-    );
-  }
 
   render() {
     const { state } = this;
