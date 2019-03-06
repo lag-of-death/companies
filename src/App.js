@@ -6,10 +6,9 @@ import {
   Container,
   AddedCompanies,
   FoundCompanies,
-  AddedCompaniesHeader,
+  Header,
   SearchInput,
   Company,
-  SearchCompanyHeader,
   Divider,
   Button,
   CompanyAdder,
@@ -114,6 +113,7 @@ class App extends Component {
 
     if (isRemovingConfirmed) {
       this.setState(({ addedCompanies }) => ({
+        progress: NOOP,
         addedCompanies: addedCompanies.filter(
           addedCompany => addedCompany.name !== companyName,
         ),
@@ -144,9 +144,9 @@ class App extends Component {
     return (
       <Container>
         <CompanyAdder>
-          <SearchCompanyHeader>
+          <Header>
             SEARCH
-          </SearchCompanyHeader>
+          </Header>
           <SearchInput onChange={this.searchForCompanyHandler} />
           <FoundCompanies>
             {
@@ -163,15 +163,15 @@ class App extends Component {
             )
           }
           </FoundCompanies>
-          <div>
+          <Header>
             { state.progress }
-          </div>
+          </Header>
         </CompanyAdder>
         <Divider />
         <AddedCompanies>
-          <AddedCompaniesHeader>
+          <Header>
           ADDED COMPANIES
-          </AddedCompaniesHeader>
+          </Header>
           {
             state.addedCompanies.map(
               addedCompany => (

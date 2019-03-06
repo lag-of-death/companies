@@ -23,7 +23,7 @@ const FoundCompanies = styled.div`
   padding: 8px;
 `;
 
-const AddedCompaniesHeader = styled.div`
+const Header = styled.div`
   background: ${blackColor};
   color: ${whiteColor};
   font-family: sans-serif;
@@ -49,15 +49,6 @@ const Company = styled.div`
   &:hover {
     background: ${grayColor}
   }
-`;
-
-const SearchCompanyHeader = styled.div`
-  background: ${blackColor};
-  color: ${whiteColor};
-  font-family: sans-serif;
-  font-size: 30px;
-  margin-bottom: 6px;
-  text-align: center;
 `;
 
 const Divider = styled.div`
@@ -94,10 +85,9 @@ export {
   Container,
   AddedCompanies,
   FoundCompanies,
-  AddedCompaniesHeader,
   SearchInput,
   Company,
-  SearchCompanyHeader,
+  Header,
   Divider,
   Logo,
   Button,
