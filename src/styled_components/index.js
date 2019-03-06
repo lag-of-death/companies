@@ -87,6 +87,32 @@ const CompanyAdder = styled.div`
   }
 `;
 
+const Domain = styled.div`
+  width: 15%;
+  word-break: break-all;
+`;
+
+const TradingHours = styled.div`
+  text-align: center;
+`;
+
+const Price = styled.div`
+  text-align: center;
+  width: 10%;  
+  word-break: break-all; 
+`;
+
+const PriceChange = styled.div`
+  text-align: center;
+  width: 10%;
+  word-break: break-all; 
+`;
+
+const Name = styled.div`
+  width: 20%; 
+  word-break: break-word;
+`;
+
 export {
   Container,
   AddedCompaniesContainer,
@@ -98,4 +124,9 @@ export {
   Logo,
   Button,
   CompanyAdder,
+  Domain,
+  TradingHours,
+  Name,
+  Price,
+  PriceChange,
 };

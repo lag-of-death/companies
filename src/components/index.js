@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Company, Logo } from '../styled_components';
+import {
+  Button, Company, Logo, Domain,
+  TradingHours,
+  Name,
+  Price,
+  PriceChange,
+} from '../styled_components';
 import { nameAttr, symbolAttr, ADDING } from '../helpers/constants';
 
 const AddedCompanies = ({ addedCompanies, removeCompanyHandler }) => addedCompanies.map(
@@ -21,23 +27,23 @@ const FoundCompanyDataViewer = ({
   domain, name, logo, removeCompanyHandler, marketOpen, marketClose, price, priceChange,
 }) => (
   <React.Fragment>
-    <div title="domain" style={{ width: '15%', wordBreak: 'break-all' }}>
+    <Domain title="domain">
       {domain}
-    </div>
-    <div title="trading hours" style={{ width: '5%', textAlign: 'center' }}>
+    </Domain>
+    <TradingHours title="trading hours">
       {marketOpen} - {marketClose}
-    </div>
-    <div title="price" style={{ width: '10%' }}>
+    </TradingHours>
+    <Price title="price">
       {price}
-    </div>
-    <div title="price change" style={{ width: '10%' }}>
+    </Price>
+    <PriceChange title="price change">
       {priceChange}
-    </div>
-    <div title="name" style={{ width: '20%', wordBreak: 'break-word' }}>
+    </PriceChange>
+    <Name title="name">
       { name }
-    </div>
+    </Name>
     <Logo title="logo">
-      <img alt={name} src={logo} />
+      <img alt={name.split(' ')[0]} src={logo} />
     </Logo>
     <Button onClick={() => removeCompanyHandler(name)}>X</Button>
   </React.Fragment>
@@ -65,9 +71,7 @@ const FoundCompanies = ({ progress, addCompanyHandler, foundCompanies }) => (
 
     return (
       <Company key={`${companyName}:${symbol}:${companyIdx}`}>
-        <div style={{ width: '40%' }}>
-          { companyName }
-        </div>
+        { companyName }
         <Button
           disabled={progress === ADDING}
           onClick={() => addCompanyHandler(company)}
