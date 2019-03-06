@@ -52,7 +52,7 @@ class App extends Component {
   };
 
   addCompanyHandler = async (foundCompany) => {
-    const name = foundCompany[nameAttr].replace(/(Inc\.)|(L\.P\.)/gm, '');
+    const name = foundCompany[nameAttr].replace(/(Inc\.)|(L\.P\.)|(Ltd\.)/gm, '');
 
     const logoEndpoint = `https://autocomplete.clearbit.com/v1/companies/suggest?query=${name}`;
     const { data: companiesWithLogos } = await axios.get(logoEndpoint);
