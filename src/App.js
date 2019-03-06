@@ -63,13 +63,14 @@ class App extends Component {
         .filter(x => !addedCompaniesNames.includes(x))
         .concat(addedCompaniesNames.filter(x => !uniqCompaniesNames.includes(x)));
 
+      const notAddedCompanies = notAddedCompaniesNames.reduce((acc, notAddedCompanyName) => {
+        const company = uniqCompanies.find(({ name }) => name === notAddedCompanyName);
+
+        return company ? acc.concat(Object.assign({}, company, foundCompany)) : acc;
+      }, []);
+
       return {
-        addedCompanies: addedCompanies.concat(
-          notAddedCompaniesNames
-            .map(
-              notAddedCompanyName => uniqCompanies.find(({ name }) => name === notAddedCompanyName),
-            ).filter(val => val),
-        ),
+        addedCompanies: addedCompanies.concat(notAddedCompanies),
       };
     });
   };
@@ -132,6 +133,8 @@ class App extends Component {
               addedCompany => (
                 <Company key={addedCompany.name}>
                   <FoundCompanyDataViewer
+                    marketOpen={addedCompany['5. marketOpen']}
+                    marketClose={addedCompany['6. marketClose']}
                     removeCompanyHandler={this.removeCompanyHandler}
                     {...addedCompany}
                   />
