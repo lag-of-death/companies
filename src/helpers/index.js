@@ -38,17 +38,35 @@ const getDifference = (arr1, arr2) => {
     .concat(addedCompaniesNames.filter(x => !uniqCompaniesNames.includes(x)));
 };
 
-const getUniqCompanies = possiblyNotAddedCompanies => possiblyNotAddedCompanies.reduce(
-  (companies, currentCompany) => (
-    companies.find(comp => comp.name === currentCompany.name)
-      ? companies
-      : companies.concat(currentCompany)
-  ),
-  [],
+const getPossiblyNotAddedCompanies = (companiesWithLogos, name) => (
+  companiesWithLogos.length
+    ? companiesWithLogos
+    : [{ name, domain: '', logo: '' }]
 );
+
+const getUniqCompanies = (companiesWithLogos, companyName) => {
+  const possiblyNotAddedCompanies = getPossiblyNotAddedCompanies(
+    companiesWithLogos,
+    companyName,
+  );
+
+  return possiblyNotAddedCompanies.reduce(
+    (companies, currentCompany) => (
+      companies.find(comp => comp.name === currentCompany.name)
+        ? companies
+        : companies.concat(currentCompany)
+    ),
+    [],
+  );
+};
 
 const byMatchScore = (prevCompany, nextCompany) => prevCompany.matchScore > nextCompany.matchScore;
 
 export {
-  getPriceInfo, getData, simplifyName, getDifference, getUniqCompanies, byMatchScore,
+  getPriceInfo,
+  getData,
+  simplifyName,
+  getDifference,
+  getUniqCompanies,
+  byMatchScore,
 };

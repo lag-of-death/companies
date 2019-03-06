@@ -54,20 +54,13 @@ class App extends Component {
 
     const name = simplifyName(foundCompany[nameAttr]);
     const { companiesWithLogos, quoteData } = await getData(name, foundCompany[symbolAttr]);
-
-    const possiblyNotAddedCompanies = (
-      companiesWithLogos.length
-        ? companiesWithLogos
-        : [{ name: foundCompany[nameAttr], domain: '', logo: '' }]
-    );
-
-    const uniqCompanies = getUniqCompanies(possiblyNotAddedCompanies);
+    const notAddedUniqCompanies = getUniqCompanies(companiesWithLogos, foundCompany[nameAttr]);
 
     this.setState(({ addedCompanies }) => {
-      const notAddedCompaniesNames = getDifference(uniqCompanies, addedCompanies);
+      const notAddedCompaniesNames = getDifference(notAddedUniqCompanies, addedCompanies);
 
       const notAddedCompanies = notAddedCompaniesNames.reduce((acc, notAddedCompanyName) => {
-        const company = uniqCompanies.find(({ name }) => name === notAddedCompanyName);
+        const company = notAddedUniqCompanies.find(({ name }) => name === notAddedCompanyName);
 
         return company
           ? acc.concat(Object.assign({}, company, foundCompany, getPriceInfo(quoteData)))
