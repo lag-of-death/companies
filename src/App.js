@@ -14,7 +14,7 @@ import {
 } from './styled_components';
 
 import {
-  getPriceInfo, getData, simplifyName, getDifference, getUniqCompanies,
+  getPriceInfo, getData, simplifyName, getDifference, getUniqCompanies, byMatchScore,
 } from './helpers';
 
 import {
@@ -43,9 +43,7 @@ class App extends Component {
     if (companies && companies.length) {
       this.setState({
         progress: SEARCHING_DONE,
-        foundCompanies: companies.sort(
-          (prevCompany, nextCompany) => prevCompany.matchScore > nextCompany.matchScore,
-        ),
+        foundCompanies: companies.sort(byMatchScore),
       });
     }
   };

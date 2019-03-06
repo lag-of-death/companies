@@ -45,6 +45,8 @@ const getUniqCompanies = possiblyNotAddedCompanies => possiblyNotAddedCompanies.
   [],
 );
 
+const byMatchScore = (prevCompany, nextCompany) => prevCompany.matchScore > nextCompany.matchScore;
+
 export {
-  getPriceInfo, getData, simplifyName, getDifference, getUniqCompanies,
+  getPriceInfo, getData, simplifyName, getDifference, getUniqCompanies, byMatchScore,
 };
