@@ -13,7 +13,10 @@ import {
   CompanyAdder,
 } from './styled_components';
 
-import { getPriceInfo, toName } from './helpers';
+import {
+  getPriceInfo, getData, simplifyName, getDifference, getUniqCompanies,
+} from './helpers';
+
 import {
   NOOP, SEARCHING, ADDING, ADDING_DONE, ALREADY_ADDED, SEARCHING_DONE, nameAttr, symbolAttr,
 } from './helpers/constants';
@@ -52,32 +55,19 @@ class App extends Component {
       progress: ADDING,
     });
 
-    const name = foundCompany[nameAttr].replace(/(Inc\.)|(L\.P\.)|(Ltd\.)/gm, '');
+    const name = simplifyName(foundCompany[nameAttr]);
+    const { companiesWithLogos, quoteData } = await getData(name, foundCompany[symbolAttr]);
 
-    const logoEndpoint = `https://autocomplete.clearbit.com/v1/companies/suggest?query=${name}`;
-    const { data: companiesWithLogos } = await axios.get(logoEndpoint);
-
-    const quoteEndpoint = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${foundCompany[symbolAttr]}&apikey=${process.env.REACT_APP_ALPHAVANTAGE_API_KEY}`;
-    const { data: quoteData } = await axios.get(quoteEndpoint);
-
-    const possiblyNotAddedCompanies = companiesWithLogos.length ? companiesWithLogos : [{ name: foundCompany[nameAttr], domain: '', logo: '' }];
-
-    const uniqCompanies = possiblyNotAddedCompanies.reduce(
-      (companies, currentCompany) => (
-        companies.find(comp => comp.name === currentCompany.name)
-          ? companies
-          : companies.concat(currentCompany)
-      ),
-      [],
+    const possiblyNotAddedCompanies = (
+      companiesWithLogos.length
+        ? companiesWithLogos
+        : [{ name: foundCompany[nameAttr], domain: '', logo: '' }]
     );
 
-    this.setState(({ addedCompanies }) => {
-      const uniqCompaniesNames = uniqCompanies.map(toName);
-      const addedCompaniesNames = addedCompanies.map(toName);
+    const uniqCompanies = getUniqCompanies(possiblyNotAddedCompanies);
 
-      const notAddedCompaniesNames = uniqCompaniesNames
-        .filter(x => !addedCompaniesNames.includes(x))
-        .concat(addedCompaniesNames.filter(x => !uniqCompaniesNames.includes(x)));
+    this.setState(({ addedCompanies }) => {
+      const notAddedCompaniesNames = getDifference(uniqCompanies, addedCompanies);
 
       const notAddedCompanies = notAddedCompaniesNames.reduce((acc, notAddedCompanyName) => {
         const company = uniqCompanies.find(({ name }) => name === notAddedCompanyName);

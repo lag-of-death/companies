@@ -57,8 +57,8 @@ FoundCompanyDataViewer.propTypes = {
   removeCompanyHandler: PropTypes.func.isRequired,
 };
 
-const FoundCompanies = ({ progress, addCompanyHandler, companies }) => (
-  companies.map((company, companyIdx) => {
+const FoundCompanies = ({ progress, addCompanyHandler, foundCompanies }) => (
+  foundCompanies.map((company, companyIdx) => {
     const { [symbolAttr]: symbol, [nameAttr]: companyName } = company;
 
     return (
