@@ -85,20 +85,25 @@ const CompanyAdder = styled.div`
 `;
 
 class App extends Component {
-  static addCompanyHandler(companyName) {
-    console.log(companyName);
-  }
-
   constructor(props) {
     super(props);
 
     this.state = {
-      companies: [
+      foundCompanies: [
         { name: 'XYZ', price: 123 },
         { name: 'ABC', price: 890 },
       ],
+      addedCompanies: [],
     };
   }
+
+  addCompanyHandler = (company) => {
+    this.setState(({ addedCompanies }) => {
+      const isAdded = addedCompanies.find(addedCompany => addedCompany.name === company.name);
+
+      return isAdded ? {} : { addedCompanies: addedCompanies.concat(company) };
+    });
+  };
 
   render() {
     const { state } = this;
@@ -113,12 +118,16 @@ class App extends Component {
           <SearchButton>search</SearchButton>
           <FoundCompanies>
             {
-              state.companies.map(({ name, price }) => (
-                <FoundCompany key={`${name}:${price}`}>
-                  { name } : { price }
-                  <Button onClick={() => App.addCompanyHandler(name)}>add</Button>
-                </FoundCompany>
-              ))
+              state.foundCompanies.map((company) => {
+                const { name, price } = company;
+
+                return (
+                  <FoundCompany key={`${name}:${price}`}>
+                    { name } : { price }
+                    <Button onClick={() => this.addCompanyHandler(company)}>add</Button>
+                  </FoundCompany>
+                );
+              })
             }
           </FoundCompanies>
         </CompanyAdder>
@@ -127,7 +136,7 @@ class App extends Component {
           <AddedCompaniesHeader>
             ADDED COMPANIES
           </AddedCompaniesHeader>
-          {JSON.stringify(state.companies)}
+          {JSON.stringify(state.addedCompanies)}
         </AddedCompanies>
       </Container>
     );
