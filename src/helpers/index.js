@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const getPriceInfo = quote => (
-  (
-    quote && quote['Global Quote'])
+  (quote && quote['Global Quote'])
     ? {
       price: quote['Global Quote']['05. price'],
       priceChange: quote['Global Quote']['09. change'],
@@ -23,7 +22,7 @@ const getData = async (name, foundCompanyName) => {
 
   return {
     companiesWithLogos,
-    quoteData,
+    quoteData: getPriceInfo(quoteData),
   };
 };
 
@@ -68,14 +67,13 @@ const fromNamesToCompanies = (
   const company = notAddedUniqCompanies.find(({ name }) => name === notAddedCompanyName);
 
   return company
-    ? acc.concat(Object.assign({}, company, foundCompany, getPriceInfo(quoteData)))
+    ? acc.concat(Object.assign({}, company, foundCompany, quoteData))
     : acc;
 };
 
 const byMatchScore = (prevCompany, nextCompany) => prevCompany.matchScore > nextCompany.matchScore;
 
 export {
-  getPriceInfo,
   getData,
   simplifyName,
   getDifference,

@@ -53,6 +53,7 @@ class App extends Component {
     });
 
     const name = simplifyName(foundCompany[nameAttr]);
+
     const { companiesWithLogos, quoteData } = await getData(name, foundCompany[symbolAttr]);
     const notAddedUniqCompanies = getUniqCompanies(companiesWithLogos, foundCompany[nameAttr]);
 
@@ -107,7 +108,7 @@ class App extends Component {
         <Divider />
         <AddedCompaniesContainer>
           <Header>
-          ADDED COMPANIES
+            ADDED COMPANIES
           </Header>
           <AddedCompanies
             addedCompanies={state.addedCompanies}
