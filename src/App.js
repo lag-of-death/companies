@@ -105,56 +105,66 @@ class App extends Component {
     });
   };
 
-  static renderCompanies(companies, getComponent = () => null) {
-    return (
-      companies.map((company) => {
-        const { name, price } = company;
+   removeCompanyHandler = (company) => {
+     const isRemovingConfirmed = window.confirm('Are you sure to remove?');
 
-        return (
-          <Company key={`${name}:${price}`}>
-            { name } : { price }
-            { getComponent(company) }
-          </Company>
-        );
-      })
-    );
-  }
+     if (isRemovingConfirmed) {
+       this.setState(({ addedCompanies }) => ({
+         addedCompanies: addedCompanies.filter(addedCompany => addedCompany.name !== company.name),
+       }));
+     }
+   };
 
-  render() {
-    const { state } = this;
+   static renderCompanies(companies, getComponent = () => null) {
+     return (
+       companies.map((company) => {
+         const { name, price } = company;
 
-    return (
-      <Container>
-        <CompanyAdder>
-          <SearchCompanyHeader>
+         return (
+           <Company key={`${name}:${price}`}>
+             { name } : { price }
+             { getComponent(company) }
+           </Company>
+         );
+       })
+     );
+   }
+
+   render() {
+     const { state } = this;
+
+     return (
+       <Container>
+         <CompanyAdder>
+           <SearchCompanyHeader>
             SEARCH
-          </SearchCompanyHeader>
-          <SearchInput />
-          <SearchButton>search</SearchButton>
-          <FoundCompanies>
-            {
+           </SearchCompanyHeader>
+           <SearchInput />
+           <SearchButton>search</SearchButton>
+           <FoundCompanies>
+             {
               App.renderCompanies(
                 state.foundCompanies,
                 company => <Button onClick={() => this.addCompanyHandler(company)}>add</Button>,
               )
             }
-          </FoundCompanies>
-        </CompanyAdder>
-        <Divider />
-        <AddedCompanies>
-          <AddedCompaniesHeader>
+           </FoundCompanies>
+         </CompanyAdder>
+         <Divider />
+         <AddedCompanies>
+           <AddedCompaniesHeader>
             ADDED COMPANIES
-          </AddedCompaniesHeader>
-          {
+           </AddedCompaniesHeader>
+           {
             App.renderCompanies(
               state.addedCompanies,
-              company => <Button>REMOVE {company.name}</Button>,
+              company => <Button onClick={() => this.removeCompanyHandler(company)}>X</Button>,
             )
           }
-        </AddedCompanies>
-      </Container>
-    );
-  }
+         </AddedCompanies>
+       </Container>
+     );
+   }
 }
 
 export default App;
