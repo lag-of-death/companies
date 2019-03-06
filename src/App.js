@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+const blackColor = '#000';
+const whiteColor = '#FFF';
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -12,20 +15,20 @@ const Container = styled.div`
 `;
 
 const AddedCompanies = styled.div`
-  border: 2px solid black;
+  border: 2px solid ${blackColor};
   flex-grow: 4;
   padding: 8px;
 `;
 
 const FoundCompanies = styled.div`
-  border-top: 2px solid black;
+  border-top: 2px solid ${blackColor};
   margin-top: 8px;
   padding: 8px;
 `;
 
 const AddedCompaniesHeader = styled.div`
-  background: black;
-  color: white;
+  background: ${blackColor};
+  color: ${whiteColor};
   font-family: sans-serif;
   font-size: 30px;
   margin-bottom: 6px;
@@ -33,7 +36,7 @@ const AddedCompaniesHeader = styled.div`
 `;
 
 const SearchInput = styled.input`
-  border: 2px solid black;
+  border: 2px solid ${blackColor};
   margin-bottom: 2px;
 `;
 
@@ -45,8 +48,8 @@ const FoundCompany = styled.div`
 `;
 
 const SearchCompanyHeader = styled.div`
-  background: black;
-  color: white;
+  background: ${blackColor};
+  color: ${whiteColor};
   font-family: sans-serif;
   font-size: 30px;
   margin-bottom: 6px;
@@ -54,7 +57,7 @@ const SearchCompanyHeader = styled.div`
 `;
 
 const SearchButton = styled.button`
-  border: 2px solid black;
+  border: 2px solid ${blackColor};
 `;
 
 const Divider = styled.div`
@@ -62,7 +65,7 @@ const Divider = styled.div`
 `;
 
 const Button = styled.button`
-  border: 2px solid black;
+  border: 2px solid ${blackColor};
 `;
 
 const CompanyAdder = styled.div`
@@ -72,7 +75,7 @@ const CompanyAdder = styled.div`
   padding: 8px;
 
   @media(min-width: 768px) {
-    border: 2px solid black;
+    border: 2px solid ${blackColor};
   }
 `;
 
