@@ -14,6 +14,8 @@ import {
   CompanyAdder,
 } from './styled_components';
 
+import { getPriceInfo, toName } from './helpers';
+
 const NOOP = 'NOOP';
 const SEARCHING = 'SEARCHING';
 const SEARCHING_DONE = 'SEARCHING_DONE';
@@ -23,16 +25,6 @@ const ALREADY_ADDED = 'ALREADY_ADDED';
 
 const nameAttr = '2. name';
 const symbolAttr = '1. symbol';
-
-const getPriceInfo = quote => (
-  (
-    quote && quote['Global Quote'])
-    ? {
-      price: quote['Global Quote']['05. price'],
-      priceChange: quote['Global Quote']['09. change'],
-    }
-    : {}
-);
 
 class App extends Component {
   constructor(props) {
@@ -88,8 +80,8 @@ class App extends Component {
     );
 
     this.setState(({ addedCompanies }) => {
-      const uniqCompaniesNames = uniqCompanies.map(({ name }) => name);
-      const addedCompaniesNames = addedCompanies.map(({ name }) => name);
+      const uniqCompaniesNames = uniqCompanies.map(toName);
+      const addedCompaniesNames = addedCompanies.map(toName);
 
       const notAddedCompaniesNames = uniqCompaniesNames
         .filter(x => !addedCompaniesNames.includes(x))
