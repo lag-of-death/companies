@@ -40,7 +40,8 @@ class App extends Component {
   };
 
   addCompanyHandler = async (foundCompany) => {
-    const logoEndpoint = `https://autocomplete.clearbit.com/v1/companies/suggest?query=${foundCompany[nameAttr]}`;
+    const name = foundCompany[nameAttr].replace(/(Inc\.)|(L\.P\.)/gm, '');
+    const logoEndpoint = `https://autocomplete.clearbit.com/v1/companies/suggest?query=${name}`;
     const { data: companiesWithLogos } = await axios.get(logoEndpoint);
 
     const uniqCompanies = companiesWithLogos.reduce(
@@ -62,9 +63,10 @@ class App extends Component {
 
       return {
         addedCompanies: addedCompanies.concat(
-          notAddedCompaniesNames.map(
-            notAddedCompanyName => uniqCompanies.find(({ name }) => name === notAddedCompanyName),
-          ),
+          notAddedCompaniesNames
+            .map(
+              notAddedCompanyName => uniqCompanies.find(({ name }) => name === notAddedCompanyName),
+            ).filter(val => val),
         ),
       };
     });
