@@ -60,6 +60,18 @@ const getUniqCompanies = (companiesWithLogos, companyName) => {
   );
 };
 
+const fromNamesToCompanies = (
+  notAddedUniqCompanies,
+  foundCompany,
+  quoteData,
+) => (acc, notAddedCompanyName) => {
+  const company = notAddedUniqCompanies.find(({ name }) => name === notAddedCompanyName);
+
+  return company
+    ? acc.concat(Object.assign({}, company, foundCompany, getPriceInfo(quoteData)))
+    : acc;
+};
+
 const byMatchScore = (prevCompany, nextCompany) => prevCompany.matchScore > nextCompany.matchScore;
 
 export {
@@ -69,4 +81,5 @@ export {
   getDifference,
   getUniqCompanies,
   byMatchScore,
+  fromNamesToCompanies,
 };

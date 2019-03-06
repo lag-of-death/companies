@@ -13,7 +13,7 @@ import {
 } from './styled_components';
 
 import {
-  getPriceInfo, getData, simplifyName, getDifference, getUniqCompanies, byMatchScore,
+  getData, simplifyName, getDifference, getUniqCompanies, byMatchScore, fromNamesToCompanies,
 } from './helpers';
 
 import {
@@ -58,14 +58,10 @@ class App extends Component {
 
     this.setState(({ addedCompanies }) => {
       const notAddedCompaniesNames = getDifference(notAddedUniqCompanies, addedCompanies);
-
-      const notAddedCompanies = notAddedCompaniesNames.reduce((acc, notAddedCompanyName) => {
-        const company = notAddedUniqCompanies.find(({ name }) => name === notAddedCompanyName);
-
-        return company
-          ? acc.concat(Object.assign({}, company, foundCompany, getPriceInfo(quoteData)))
-          : acc;
-      }, []);
+      const notAddedCompanies = notAddedCompaniesNames.reduce(
+        fromNamesToCompanies(notAddedUniqCompanies, foundCompany, quoteData),
+        [],
+      );
 
       return {
         progress: notAddedCompanies.length ? ADDING_DONE : ALREADY_ADDED,
