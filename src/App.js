@@ -93,7 +93,7 @@ class App extends Component {
           <Header>
             SEARCH
           </Header>
-          <SearchInput onChange={this.searchForCompanyHandler} />
+          <SearchInput placeholder="provide a symbol" onChange={this.searchForCompanyHandler} />
           <FoundCompaniesContainer>
             <FoundCompanies
               progress={state.progress}
