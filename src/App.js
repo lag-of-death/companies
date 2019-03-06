@@ -19,7 +19,7 @@ const SEARCHING = 'SEARCHING';
 const SEARCHING_DONE = 'SEARCHING_DONE';
 const ADDING = 'ADDING';
 const ADDING_DONE = 'ADDING_DONE';
-const NOT_FOUND = 'NOT_FOUND';
+const ALREADY_ADDED = 'ALREADY_ADDED';
 
 const nameAttr = '2. name';
 const symbolAttr = '1. symbol';
@@ -76,7 +76,9 @@ class App extends Component {
     const quoteEndpoint = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${foundCompany[symbolAttr]}&apikey=${process.env.REACT_APP_ALPHAVANTAGE_API_KEY}`;
     const { data: quoteData } = await axios.get(quoteEndpoint);
 
-    const uniqCompanies = companiesWithLogos.reduce(
+    const possiblyNotAddedCompanies = companiesWithLogos.length ? companiesWithLogos : [{ name: foundCompany[nameAttr], domain: '', logo: '' }];
+
+    const uniqCompanies = possiblyNotAddedCompanies.reduce(
       (companies, currentCompany) => (
         companies.find(comp => comp.name === currentCompany.name)
           ? companies
@@ -102,7 +104,7 @@ class App extends Component {
       }, []);
 
       return {
-        progress: notAddedCompanies.length ? ADDING_DONE : NOT_FOUND,
+        progress: notAddedCompanies.length ? ADDING_DONE : ALREADY_ADDED,
         addedCompanies: addedCompanies.concat(notAddedCompanies),
       };
     });
