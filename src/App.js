@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 const blackColor = '#000';
 const whiteColor = '#FFF';
+const grayColor = '#D3D3D3';
 
 const Container = styled.div`
   display: flex;
@@ -45,6 +46,10 @@ const FoundCompany = styled.div`
   justify-content: space-between;
   margin-bottom: 2px;
   margin-top: 2px;
+  
+  &:hover {
+    background: ${grayColor}
+  }
 `;
 
 const SearchCompanyHeader = styled.div`
