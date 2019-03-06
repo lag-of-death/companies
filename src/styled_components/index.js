@@ -35,6 +35,8 @@ const AddedCompaniesHeader = styled.div`
 const SearchInput = styled.input`
   border: 2px solid ${blackColor};
   margin-bottom: 2px;
+  font-size: 30px;
+  padding: 2px;
 `;
 
 const Company = styled.div`
