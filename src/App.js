@@ -34,7 +34,9 @@ class App extends Component {
 
     if (companies && companies.length) {
       this.setState({
-        foundCompanies: companies,
+        foundCompanies: companies.sort(
+          (prevCompany, nextCompany) => prevCompany.matchScore > nextCompany.matchScore,
+        ),
       });
     }
   };
