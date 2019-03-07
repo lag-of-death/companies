@@ -32,3 +32,22 @@ In production, two additional envs might be set:
 
 Please bear in mind that the app was created with the use of Create React App.
 So some nodejs modules are already installed even if they are not listed in `package.json` (i.e. `eslint`, `babel-eslint`)
+
+## How to run
+
+First, please set up env variables.
+
+### Development
+
+```
+1. yarn
+2. yarn start
+```
+
+### Production
+
+```
+1. yarn
+2. yarn build
+3. node server.js
+```
