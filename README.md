@@ -16,7 +16,7 @@ https://trading-companies.herokuapp.com/
 - memoization of pure functions
 - add timeout when inputting a symbol for company (for now there is no daley between keystrokes and requests to the APIs)
 - change layout (current one is rather mock-upish, but still functional)
-- remove the need for the native confirmation modal
+- remove the need for the native confirmation modal when removing an added company
 
 ## Environmental variables
 
@@ -24,7 +24,7 @@ For both production and development environments, `REACT_APP_ALPHAVANTAGE_API_KE
 
 In production, two additional envs might be set:
 
-`PORT` - on what port to run the app
+`PORT` - on what port to run the app (will default to 8080)
 `IP_THAT_CAN_SEE_SOURCE_MAPS`- IP that can access source maps (if not set, no-one can access source maps)
 
 ## To be noted
