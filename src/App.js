@@ -44,18 +44,20 @@ class App extends Component {
       progress: value ? SEARCHING : NOOP,
     });
 
-    const searchWithSymbolEndpoint = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${value}&apikey=${process.env.REACT_APP_ALPHAVANTAGE_API_KEY}`;
-    const { data: { bestMatches: companies } } = await axios.get(searchWithSymbolEndpoint);
+    if (value) {
+      const searchWithSymbolEndpoint = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${value}&apikey=${process.env.REACT_APP_ALPHAVANTAGE_API_KEY}`;
+      const { data: { bestMatches: companies } } = await axios.get(searchWithSymbolEndpoint);
 
-    if (companies && companies.length) {
-      this.setState({
-        progress: SEARCHING_DONE,
-        foundCompanies: companies.sort(byMatchScore),
-      });
-    } else {
-      this.setState({
-        progress: API_LIMIT_REACHED,
-      });
+      if (companies && companies.length) {
+        this.setState({
+          progress: SEARCHING_DONE,
+          foundCompanies: companies.sort(byMatchScore),
+        });
+      } else {
+        this.setState({
+          progress: API_LIMIT_REACHED,
+        });
+      }
     }
   };
 
