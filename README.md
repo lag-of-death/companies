@@ -8,6 +8,8 @@ https://trading-companies.herokuapp.com/
 - stress putted on easy to reason about, pure functions (i.e. helpers), used pure components
 - no use of `let`s, no unnecessary mutations
 - service worker not used, there was no apparent need to do so
+- the main component `App` (stateful component) passes data and behaviors to two pure components - `FoundCompanies` and `AddedCompanies`
+- no use of helper libraries like Ramda or Lodash (written helpers - `src/helpers/index.js` - should be tested with unit tests - to be done)
 
 ## Todos
 
