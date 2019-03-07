@@ -14,6 +14,7 @@ https://trading-companies.herokuapp.com/
 ## Todos
 
 - add tests (unit and integration)
+- error handling
 - would be good if the companies in ADDED COMPANIES had their data refreshed by some interval. It was not implemented because without this, the ACs seem to still be met.
 - memoization of pure functions
 - add timeout when inputting a symbol for company (for now there is no daley between keystrokes and requests to the APIs)
