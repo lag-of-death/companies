@@ -15,9 +15,9 @@ https://trading-companies.herokuapp.com/
 
 - add tests (unit and integration)
 - error handling
-- would be good if the companies in ADDED COMPANIES had their data refreshed by some interval. It was not implemented because without this, the ACs seem to still be met.
+- would be good if the companies in ADDED COMPANIES had their data refreshed by some interval. It was not implemented because without this, the ACs seem to still be met
 - memoization of pure functions
-- add timeout when inputting a symbol for company (for now there is no daley between keystrokes and requests to the APIs)
+- add timeout when inputting a symbol for company (for now there is no delay between keystrokes and requests to the APIs)
 - change layout (current one is rather mock-upish, but still functional)
 - remove the need for the native confirmation modal when removing an added company
 
