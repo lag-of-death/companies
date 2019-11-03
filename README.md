@@ -1,7 +1,3 @@
-## Public url
-
-https://trading-companies.herokuapp.com/
-
 ## Architecture
 
 - no redux, but mutations contained within one class only - App. If redux was used, then there had not been a need to pass down event handlers to children components (they could manage this themselves)
