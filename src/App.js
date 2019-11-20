@@ -115,7 +115,7 @@ class App extends Component {
 
     return (
       <>
-        {state.showModal && <Modal>
+        {state.showModal && <Modal modalRoot={document.getElementById('modal-root')}>
           <Overlay>
             <Card>
               <h3>Are you sure to remove?</h3>
