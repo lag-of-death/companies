@@ -2,6 +2,43 @@ import styled from 'styled-components';
 
 import { blackColor, whiteColor, grayColor } from './vars';
 
+const center = `
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Card = styled.div`
+  background: white;
+  border: 2px solid ${blackColor};
+  max-width: 70%;
+  padding: 2rem;
+`;
+
+const Centered = styled.div`
+  ${center}
+`;
+
+const Spaced = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+const Overlay = styled.div`
+  ${center}
+  font-size: 2rem;
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  background: rgba(0, 0, 0, 0.5);
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -73,6 +110,7 @@ const Logo = styled.div`
 `;
 
 const Button = styled.button`
+  font-size: 1.5rem;
   border: 2px solid ${blackColor};
 `;
 
@@ -128,5 +166,9 @@ export {
   TradingHours,
   Name,
   Price,
+  Card,
   PriceChange,
+  Overlay,
+  Centered,
+  Spaced
 };

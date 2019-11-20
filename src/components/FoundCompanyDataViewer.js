@@ -5,7 +5,7 @@ import {
 } from '../styled_components';
 
 const FoundCompanyDataViewer = ({
-  domain, name, logo, removeCompanyHandler, marketOpen, marketClose, price, priceChange,
+  domain, name, logo, showModal, marketOpen, marketClose, price, priceChange,
 }) => (
   <React.Fragment>
     <Domain title="domain">
@@ -21,12 +21,12 @@ const FoundCompanyDataViewer = ({
       {priceChange}
     </PriceChange>
     <Name title="name">
-      { name }
+      {name}
     </Name>
     <Logo title="logo">
-      <img alt={name.split(' ')[0]} src={logo} />
+      <img alt={name.split(' ')[0]} src={logo}/>
     </Logo>
-    <Button onClick={() => removeCompanyHandler(name)}>X</Button>
+    <Button onClick={() => showModal(name)}>X</Button>
   </React.Fragment>
 );
 

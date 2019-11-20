@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { AddedCompanies, FoundCompanies } from './components';
+import Modal from './components/Modal';
 
 import {
   Container,
   AddedCompaniesContainer,
   FoundCompaniesContainer,
   Header,
+  Button,
+  Spaced,
   SearchInput,
   Divider,
+  Card,
+  Centered,
+  Overlay,
   CompanyAdder,
 } from './styled_components';
 
@@ -33,6 +39,8 @@ class App extends Component {
     super(props);
 
     this.state = {
+      companyName: '',
+      showModal: false,
       progress: NOOP,
       foundCompanies: [],
       addedCompanies: [],
@@ -85,51 +93,81 @@ class App extends Component {
     });
   };
 
-  removeCompanyHandler = (companyName) => {
-    const isRemovingConfirmed = window.confirm('Are you sure to remove?');
+  showModal = (companyName) => {
+    this.setState({
+      showModal: true,
+      companyName
+    });
+  };
 
-    if (isRemovingConfirmed) {
-      this.setState(({ addedCompanies }) => ({
-        progress: NOOP,
-        addedCompanies: addedCompanies.filter(
-          addedCompany => addedCompany.name !== companyName,
-        ),
-      }));
-    }
+  removeCompanyHandler = (companyName) => {
+    this.setState(({ addedCompanies }) => ({
+      showModal: false,
+      progress: NOOP,
+      addedCompanies: addedCompanies.filter(
+        addedCompany => addedCompany.name !== companyName,
+      ),
+    }));
   };
 
   render() {
     const { state } = this;
 
     return (
-      <Container>
-        <CompanyAdder>
-          <Header>
-            SEARCH
-          </Header>
-          <SearchInput placeholder="provide a symbol" onChange={this.searchForCompanyHandler} />
-          <FoundCompaniesContainer>
-            <FoundCompanies
-              progress={state.progress}
-              addCompanyHandler={this.addCompanyHandler}
-              foundCompanies={state.foundCompanies}
+      <>
+        {state.showModal && <Modal>
+          <Overlay>
+            <Card>
+              <h3>Are you sure to remove?</h3>
+
+              <Centered>
+                <Spaced>
+                  <Button onClick={() => {
+                    this.removeCompanyHandler(state.companyName);
+                  }}>
+                    remove
+                  </Button>
+                  <Button onClick={() => {
+                    this.setState({
+                      showModal: false
+                    });
+                  }}>
+                    cancel
+                  </Button>
+                </Spaced>
+              </Centered>
+            </Card>
+          </Overlay>
+        </Modal>}
+        <Container>
+          <CompanyAdder>
+            <Header>
+              SEARCH
+            </Header>
+            <SearchInput placeholder="provide a symbol" onChange={this.searchForCompanyHandler}/>
+            <FoundCompaniesContainer>
+              <FoundCompanies
+                progress={state.progress}
+                addCompanyHandler={this.addCompanyHandler}
+                foundCompanies={state.foundCompanies}
+              />
+            </FoundCompaniesContainer>
+            <Header>
+              {state.progress}
+            </Header>
+          </CompanyAdder>
+          <Divider/>
+          <AddedCompaniesContainer>
+            <Header>
+              ADDED COMPANIES
+            </Header>
+            <AddedCompanies
+              addedCompanies={state.addedCompanies}
+              showModal={this.showModal}
             />
-          </FoundCompaniesContainer>
-          <Header>
-            { state.progress }
-          </Header>
-        </CompanyAdder>
-        <Divider />
-        <AddedCompaniesContainer>
-          <Header>
-            ADDED COMPANIES
-          </Header>
-          <AddedCompanies
-            addedCompanies={state.addedCompanies}
-            removeCompanyHandler={this.removeCompanyHandler}
-          />
-        </AddedCompaniesContainer>
-      </Container>
+          </AddedCompaniesContainer>
+        </Container>
+      </>
     );
   }
 }
