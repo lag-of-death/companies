@@ -80,6 +80,10 @@ const SearchInput = styled.input`
   padding: 2px;
 `;
 
+const CompanyName = styled.span`
+  word-break: break-all;
+`;
+
 const Company = styled.div`
   align-items: center;
   display: flex;
@@ -174,6 +178,7 @@ export {
   Card,
   PriceChange,
   Overlay,
+  CompanyName,
   Centered,
   Spaced,
 };

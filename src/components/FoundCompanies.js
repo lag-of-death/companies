@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ADDING, nameAttr, symbolAttr } from '../helpers/constants';
-import { Button, Company } from '../styled_components';
+import { Button, Company, CompanyName } from '../styled_components';
 
 const FoundCompanies = ({ progress, addCompanyHandler, foundCompanies }) => (
   foundCompanies.map((company, companyIdx) => {
@@ -9,7 +9,11 @@ const FoundCompanies = ({ progress, addCompanyHandler, foundCompanies }) => (
 
     return (
       <Company key={`${companyName}:${symbol}:${companyIdx}`}>
-        { companyName }
+
+        <CompanyName>
+          {companyName}
+        </CompanyName>
+
         <Button
           disabled={progress === ADDING}
           onClick={() => addCompanyHandler(company)}
