@@ -170,5 +170,5 @@ export {
   PriceChange,
   Overlay,
   Centered,
-  Spaced
+  Spaced,
 };

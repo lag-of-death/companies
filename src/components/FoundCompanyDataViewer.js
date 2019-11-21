@@ -24,7 +24,7 @@ const FoundCompanyDataViewer = ({
       {name}
     </Name>
     <Logo title="logo">
-      <img alt={name.split(' ')[0]} src={logo}/>
+      <img alt={name.split(' ')[0]} src={logo} />
     </Logo>
     <Button onClick={() => showModal(name)}>X</Button>
   </React.Fragment>
@@ -43,7 +43,7 @@ FoundCompanyDataViewer.propTypes = {
   marketOpen: PropTypes.string.isRequired,
   marketClose: PropTypes.string.isRequired,
   logo: PropTypes.string.isRequired,
-  removeCompanyHandler: PropTypes.func.isRequired,
+  showModal: PropTypes.func.isRequired,
 };
 
 export default FoundCompanyDataViewer;

@@ -1269,6 +1269,11 @@ aws4@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
 
+axe-core@^3.3.2:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.4.0.tgz#a57ee620c182d5389aff229586aaae06bc541abe"
+  integrity sha512-5C0OdgxPv/DrQguO6Taj5F1dY5OlkWg4SVmZIVABFYKWlnAc5WTLPzG+xJSgIwf2fmY+NiNGiZXhXx2qT0u/9Q==
+
 axios@^0.18.0:
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.18.0.tgz#32d53e4851efdc0a11993b6cd000789d70c05102"
@@ -6945,6 +6950,14 @@ react-app-polyfill@^0.2.0:
     raf "3.4.1"
     whatwg-fetch "3.0.0"
 
+react-axe@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/react-axe/-/react-axe-3.3.0.tgz#b87bff644ed3ed6f1ca12bcc64c00000e359c25b"
+  integrity sha512-JoxU2jcTla37U6MtqIoYnGaRQcAHkNm9JxTjx2wcEgFm8Zd2A2vo9eboxcmpLjklXDKJwJNbyDo2Jcbbme6xwA==
+  dependencies:
+    axe-core "^3.3.2"
+    requestidlecallback "^0.3.0"
+
 react-dev-utils@^7.0.1:
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-7.0.3.tgz#f1316cfffd792fd41b0c28ad5db86c1d74484d6f"
@@ -7278,6 +7291,11 @@ request@^2.87.0, request@^2.88.0:
     tough-cookie "~2.4.3"
     tunnel-agent "^0.6.0"
     uuid "^3.3.2"
+
+requestidlecallback@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/requestidlecallback/-/requestidlecallback-0.3.0.tgz#6fb74e0733f90df3faa4838f9f6a2a5f9b742ac5"
+  integrity sha1-b7dOBzP5DfP6pIOPn2oqX5t0KsU=
 
 require-directory@^2.1.1:
   version "2.1.1"

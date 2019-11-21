@@ -1,5 +1,8 @@
 {
-  "extends": ["airbnb", "plugin:jsx-a11y/strict"],
+  "extends": [
+    "airbnb",
+    "plugin:jsx-a11y/strict"
+  ],
   "parser": "babel-eslint",
   "plugins": [
     "jsx-a11y"
@@ -8,18 +11,30 @@
     "react/jsx-filename-extension": [
       1,
       {
-        "extensions": [".js"]
+        "extensions": [
+          ".js"
+        ]
       }
     ],
     "react/no-array-index-key": 0,
     "react/jsx-one-expression-per-line": 0,
     "no-underscore-dangle": 0,
     "no-nested-ternary": 0,
-    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
     "no-alert": 0,
+    "no-console": 0,
     "no-shadow": 0,
     "no-restricted-globals": 0,
-    "import/imports-first": ["error", "absolute-first"],
+    "import/imports-first": [
+      "error",
+      "absolute-first"
+    ],
     "import/newline-after-import": "error"
   },
   "globals": {

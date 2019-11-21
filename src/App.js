@@ -96,7 +96,7 @@ class App extends Component {
   showModal = (companyName) => {
     this.setState({
       showModal: true,
-      companyName
+      companyName,
     });
   };
 
@@ -115,7 +115,8 @@ class App extends Component {
 
     return (
       <>
-        {state.showModal && <Modal modalRoot={document.getElementById('modal-root')}>
+        {state.showModal && (
+        <Modal modalRoot={document.getElementById('modal-root')}>
           <Overlay>
             <Card>
               <h3>Are you sure to remove?</h3>
@@ -124,27 +125,30 @@ class App extends Component {
                 <Spaced>
                   <Button onClick={() => {
                     this.removeCompanyHandler(state.companyName);
-                  }}>
+                  }}
+                  >
                     remove
                   </Button>
                   <Button onClick={() => {
                     this.setState({
-                      showModal: false
+                      showModal: false,
                     });
-                  }}>
+                  }}
+                  >
                     cancel
                   </Button>
                 </Spaced>
               </Centered>
             </Card>
           </Overlay>
-        </Modal>}
+        </Modal>
+        )}
         <Container>
           <CompanyAdder>
             <Header>
               SEARCH
             </Header>
-            <SearchInput placeholder="provide a symbol" onChange={this.searchForCompanyHandler}/>
+            <SearchInput placeholder="provide a symbol" onChange={this.searchForCompanyHandler} />
             <FoundCompaniesContainer>
               <FoundCompanies
                 progress={state.progress}
@@ -156,7 +160,7 @@ class App extends Component {
               {state.progress}
             </Header>
           </CompanyAdder>
-          <Divider/>
+          <Divider />
           <AddedCompaniesContainer>
             <Header>
               ADDED COMPANIES
