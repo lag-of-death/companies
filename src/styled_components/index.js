@@ -114,6 +114,7 @@ const Logo = styled.div`
 `;
 
 const Button = styled.button`
+  cursor: pointer;
   font-size: 1.5rem;
   border: 2px solid ${blackColor};
 `;
