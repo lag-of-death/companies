@@ -151,6 +151,10 @@ const Name = styled.div`
   word-break: break-word;
 `;
 
+const Img = styled.img`
+  overflow-wrap: break-word;
+`;
+
 export {
   Container,
   AddedCompaniesContainer,
@@ -166,6 +170,7 @@ export {
   TradingHours,
   Name,
   Price,
+  Img,
   Card,
   PriceChange,
   Overlay,

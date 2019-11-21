@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Button, Domain, Logo, Name, Price, PriceChange, TradingHours,
+  Button, Domain, Logo, Name, Price, PriceChange, TradingHours, Img,
 } from '../styled_components';
 
 const FoundCompanyDataViewer = ({
@@ -24,7 +24,7 @@ const FoundCompanyDataViewer = ({
       {name}
     </Name>
     <Logo title="logo">
-      <img alt={name.split(' ')[0]} src={logo} />
+      <Img alt={name.split(' ')[0]} src={logo} />
     </Logo>
     <Button onClick={() => showModal(name)}>X</Button>
   </React.Fragment>

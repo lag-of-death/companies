@@ -1,8 +1,8 @@
 import React, { unstable_Profiler as Profiler } from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle } from 'styled-components';
-import App from './App';
 import axe from 'react-axe';
+import App from './App';
 
 if (process.env.NODE_ENV !== 'production') {
   axe(React, ReactDOM, 1000);
@@ -20,7 +20,7 @@ const GlobalStyle = createGlobalStyle`
 
 ReactDOM.render(
   <React.Fragment>
-    <GlobalStyle/>
+    <GlobalStyle />
     <Profiler
       id="App"
       onRender={(
@@ -48,7 +48,7 @@ ReactDOM.render(
         console.log('%c\n****** PROFILER:END ******\n\n\n\n', startOrStopColors);
       }}
     >
-      <App/>
+      <App />
     </Profiler>
   </React.Fragment>,
   document.getElementById('root'),
