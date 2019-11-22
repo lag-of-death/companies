@@ -114,64 +114,66 @@ class App extends Component {
     const { state } = this;
 
     return (
-      <>
-        {state.showModal && (
-        <Modal modalRoot={document.getElementById('modal-root')}>
-          <Overlay>
-            <Card>
-              <h3>Are you sure to remove?</h3>
+      <React.StrictMode>
+        <>
+          {state.showModal && (
+            <Modal modalRoot={document.getElementById('modal-root')}>
+              <Overlay>
+                <Card>
+                  <h3>Are you sure to remove?</h3>
 
-              <Centered>
-                <Spaced>
-                  <Button onClick={() => {
-                    this.removeCompanyHandler(state.companyName);
-                  }}
-                  >
-                    remove
-                  </Button>
-                  <Button onClick={() => {
-                    this.setState({
-                      showModal: false,
-                    });
-                  }}
-                  >
-                    cancel
-                  </Button>
-                </Spaced>
-              </Centered>
-            </Card>
-          </Overlay>
-        </Modal>
-        )}
-        <Container>
-          <CompanyAdder>
-            <Header>
-              SEARCH
-            </Header>
-            <SearchInput placeholder="provide a symbol" onChange={this.searchForCompanyHandler} />
-            <FoundCompaniesContainer>
-              <FoundCompanies
-                progress={state.progress}
-                addCompanyHandler={this.addCompanyHandler}
-                foundCompanies={state.foundCompanies}
+                  <Centered>
+                    <Spaced>
+                      <Button onClick={() => {
+                        this.removeCompanyHandler(state.companyName);
+                      }}
+                      >
+                        remove
+                      </Button>
+                      <Button onClick={() => {
+                        this.setState({
+                          showModal: false,
+                        });
+                      }}
+                      >
+                        cancel
+                      </Button>
+                    </Spaced>
+                  </Centered>
+                </Card>
+              </Overlay>
+            </Modal>
+          )}
+          <Container>
+            <CompanyAdder>
+              <Header>
+                SEARCH
+              </Header>
+              <SearchInput placeholder="provide a symbol" onChange={this.searchForCompanyHandler}/>
+              <FoundCompaniesContainer>
+                <FoundCompanies
+                  progress={state.progress}
+                  addCompanyHandler={this.addCompanyHandler}
+                  foundCompanies={state.foundCompanies}
+                />
+              </FoundCompaniesContainer>
+              <Header>
+                {state.progress}
+              </Header>
+            </CompanyAdder>
+            <Divider/>
+            <AddedCompaniesContainer>
+              <Header>
+                ADDED COMPANIES
+              </Header>
+              <AddedCompanies
+                addedCompanies={state.addedCompanies}
+                showModal={this.showModal}
               />
-            </FoundCompaniesContainer>
-            <Header>
-              {state.progress}
-            </Header>
-          </CompanyAdder>
-          <Divider />
-          <AddedCompaniesContainer>
-            <Header>
-              ADDED COMPANIES
-            </Header>
-            <AddedCompanies
-              addedCompanies={state.addedCompanies}
-              showModal={this.showModal}
-            />
-          </AddedCompaniesContainer>
-        </Container>
-      </>
+            </AddedCompaniesContainer>
+          </Container>
+        </>
+      </React.StrictMode>
     );
   }
 }
